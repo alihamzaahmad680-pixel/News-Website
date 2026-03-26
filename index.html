@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News Website</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-gray-900 text-white">
+    <nav class="fixed top-0 left-0 right-0 bg-slate-100 shadow z-50">
+      <div
+        class="max-w-6xl mx-auto flex items-center justify-between px-4 py-2"
+      >
+        <img
+          src="./download (1).jpeg"
+          onclick="reload()"
+          class="w-16 h-16 cursor-pointer rounded"
+        />
+
+        <ul class="hidden md:flex gap-6 text-gray-800 font-medium">
+          <li
+            onclick="onNavItemClick('ipl')"
+            class="cursor-pointer hover:text-blue-600"
+          >
+            IPL
+          </li>
+          <li
+            onclick="onNavItemClick('finance')"
+            class="cursor-pointer hover:text-blue-600"
+          >
+            Finance
+          </li>
+          <li
+            onclick="onNavItemClick('politics')"
+            class="cursor-pointer hover:text-blue-600"
+          >
+            Politics
+          </li>
+        </ul>
+
+        <div class="hidden md:flex gap-2 h-8">
+          <input
+            id="search-text"
+            type="text"
+            placeholder="e.g science"
+            class="w-52 px-3 border-2 border-slate-300 rounded text-black text-sm"
+          />
+          <button
+            id="search-button"
+            class="bg-blue-500 hover:bg-blue-700 text-white px-5 rounded text-sm"
+          >
+            Search
+          </button>
+        </div>
+
+        <button class="md:hidden text-gray-800 text-3xl" onclick="openMenu()">
+          ☰
+        </button>
+      </div>
+    </nav>
+    <div
+      id="mobile-menu"
+      class="fixed top-0 right-0 h-full w-64 bg-gray-900 text-white transform translate-x-full transition-transform duration-300 z-50"
+    >
+      <div class="flex justify-end p-4">
+        <button onclick="closeMenu()" class="text-2xl">✕</button>
+      </div>
+
+      <ul class="flex flex-col gap-6 px-6 text-lg">
+        <li
+          onclick="
+            onNavItemClick('ipl');
+            closeMenu();
+          "
+        >
+          IPL
+        </li>
+        <li
+          onclick="
+            onNavItemClick('finance');
+            closeMenu();
+          "
+        >
+          Finance
+        </li>
+        <li
+          onclick="
+            onNavItemClick('politics');
+            closeMenu();
+          "
+        >
+          Politics
+        </li>
+      </ul>
+
+      <div class="mt-6 px-6">
+        <input
+          id="search-text-mobile"
+          placeholder="e.g science"
+          class="w-full px-3 py-2 rounded text-black mb-3"
+        />
+        <button
+          onclick="mobileSearch()"
+          class="w-full bg-blue-500 py-2 rounded"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+
+    <main class="pt-28 pb-6">
+      <div
+        id="card-container"
+        class="max-w-6xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      ></div>
+    </main>
+
+    <template id="template-news-card">
+      <div
+        class="bg-gray-800 rounded-lg shadow-md overflow-hidden cursor-pointer hover:-translate-y-1 hover:shadow-xl transition"
+      >
+        <img class="news-img w-full h-44 object-cover" />
+        <div class="p-4">
+          <h3 class="news-title text-lg font-semibold mb-2"></h3>
+          <h6 class="news-source text-sm text-gray-400 mb-3"></h6>
+          <p
+            id="news-desc"
+            class="mt-3 text-white text-sm font-medium bg-orange-500 px-28"
+          >
+            Read More →
+          </p>
+        </div>
+      </div>
+    </template>
+    <script src="script.js"></script>
+  </body>
+</html>
