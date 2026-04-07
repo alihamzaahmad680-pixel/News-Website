@@ -1,4 +1,5 @@
-const API_KEY = "14c6ced6bb6c43309e4b6b4cd2a83e7d";
+// const API_KEY = "14c6ced6bb6c43309e4b6b4cd2a83e7d";
+const API_KEY = "234e6173f7f34c26a7a30d99d93a0d91";
 const url = "https://newsapi.org/v2/everything?";
 
 window.addEventListener('load', () => fetchNews('pakistan'));
@@ -62,12 +63,3 @@ function mobileSearch() {
   fetchNews(query);
   closeMenu();
 }
-
-
-
-
-
-
-
-
-
