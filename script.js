@@ -66,24 +66,32 @@
 // GNews API - Yeh production par work karegi
 // NOTE: Apni API Key ko environment variables mein rakhna best practice hai.
 // Security ke liye GNews par ja kar apni key reset zaroor kar lein.
+// GNews API Key - Reset karna mat bhoolna!
 const API_KEY = "b79fd922cc06b7d9368dbe3222621166";
-// const url = "https://gnews.io/api/v4/search?";
-// Pehle wala URL: "https://gnews.io/api/v4/search?"
-// Naya URL (Proxy):
-const url = "/api/news?";
+
+// Proxy URL (vercel.json mein jo source set kiya hai)
+const url = "/api/news";
 
 window.addEventListener("load", () => fetchNews("pakistan"));
 
 async function fetchNews(query) {
   try {
-    const res = await fetch(`${url}q=${query}&lang=en&apikey=${API_KEY}`);
+    // Parameters ko URLSearchParams se bhejna best hai
+    const params = new URLSearchParams({
+      q: query,
+      lang: "en",
+      apikey: API_KEY,
+    });
+
+    const res = await fetch(`${url}?${params.toString()}`);
+
+    // Agar response 200 nahi hai, toh error throw karein
+    if (!res.ok) throw new Error("Failed to fetch data");
+
     const data = await res.json();
 
-    // GNews ka data 'articles' array mein hota hai
     if (data && data.articles) {
       bindData(data.articles);
-    } else {
-      console.error("Data ya articles nahi mile:", data);
     }
   } catch (error) {
     console.error("Fetch error:", error);
@@ -99,12 +107,10 @@ function bindData(articles) {
   cardContainer.innerHTML = "";
 
   articles.forEach((article) => {
-    // GNews mein image ka field 'image' hai
     if (!article.image) return;
 
     const cardClone = newsCardTemplate.content.cloneNode(true);
 
-    // Elements safely set karein
     const img = cardClone.querySelector(".news-img");
     if (img) img.src = article.image;
 
