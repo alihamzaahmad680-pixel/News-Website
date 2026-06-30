@@ -67,7 +67,10 @@
 // NOTE: Apni API Key ko environment variables mein rakhna best practice hai.
 // Security ke liye GNews par ja kar apni key reset zaroor kar lein.
 const API_KEY = "b79fd922cc06b7d9368dbe3222621166";
-const url = "https://gnews.io/api/v4/search?";
+// const url = "https://gnews.io/api/v4/search?";
+// Pehle wala URL: "https://gnews.io/api/v4/search?"
+// Naya URL (Proxy):
+const url = "/api/news?";
 
 window.addEventListener("load", () => fetchNews("pakistan"));
 
